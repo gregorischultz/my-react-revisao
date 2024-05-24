@@ -3,29 +3,28 @@ import React from "react";
 import PropTypes from "prop-types";
 
 
-function NavBar ({pokemonIndex, setPokemonIndex, pokemonList}) {
+function NavBar ({setPokemonIndex,  pokemonList}) {
 
-const PokemonPrecedent = () => setPokemonIndex(pokemonIndex - 1);
-const PokemonSuivant = () => setPokemonIndex(pokemonIndex + 1);
 
 
     return (
         <div>
-            <nav>
-        {pokemonIndex > 0 && (
-       <button type='button' onClick={PokemonPrecedent}>Précédent</button>
-       )}
-       
-       {pokemonIndex < pokemonList.length - 1 && (
-       <button type='button' onClick={PokemonSuivant}>Suivant</button>
-       )}
-       </nav>
+           {pokemonList.map((pokemon, index) => (
+             <button
+             type="button"
+             onClick={() => setPokemonIndex(index)}
+             key={pokemon.name}
+             >
+                {pokemon.name} 
+             </button>
+           )
+        )}
+           
         </div>
     )
 }
 
 NavBar.propTypes = {
-    pokemonIndex: PropTypes.number.isRequired,
     setPokemonIndex: PropTypes.func.isRequired,
     pokemonList: PropTypes.arrayOf(
         PropTypes.shape({
